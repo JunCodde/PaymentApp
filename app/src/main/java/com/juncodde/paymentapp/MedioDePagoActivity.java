@@ -156,4 +156,15 @@ public class MedioDePagoActivity extends AppCompatActivity {
         adapter = new PaymentMethodsAdapter(listaPagos,this);
         rv_metodoDePago.setAdapter(adapter);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(MedioDePagoActivity.this, MainActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(i);
+        finish();
+    }
 }

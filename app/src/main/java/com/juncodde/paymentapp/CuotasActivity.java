@@ -155,4 +155,14 @@ public class CuotasActivity extends AppCompatActivity {
         rv_cuotas.setAdapter(adapter);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(CuotasActivity.this, BankSelectionActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        finish();
+    }
 }
