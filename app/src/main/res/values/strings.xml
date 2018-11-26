@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Completa tu pago</string>
+    <string name="error_monto">Ingresa un monto valido</string>
+    <string name="monto">Monto</string>
+    <string name="error_banco">No hay bancos disponibles con el metodo de pago seleccionado</string>
+</resources>

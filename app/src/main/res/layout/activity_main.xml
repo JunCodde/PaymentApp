@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/Lly_monto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="24dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/monto"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_monto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+
+            <TextView
+                android:id="@+id/tv_errorMonto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/error_monto"
+                android:textStyle="bold"
+                android:textColor="@color/colorError"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/btn_continuar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:text="Continuar"
+                android:background="@color/colorButton" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Lly_pagoCompletado"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="24dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:text="Monto"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="6dp"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            app:cardCornerRadius="10dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="4dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_monto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:text="$ 12.0"
+                        android:gravity="center_horizontal"
+                        android:layout_marginBottom="6dp"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:text="Metodo de Pago"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="6dp"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            app:cardCornerRadius="10dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="4dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_medioPago"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_medioPago"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="MasterCard"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:text="Tipo de Banco"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="6dp"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            app:cardCornerRadius="10dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="4dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_tipoBanco"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_tipoBanco"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="MasterCard"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:text="Cuotas"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="6dp"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_selected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            app:cardCornerRadius="10dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="4dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_Cuotas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1 Cuota de $1200"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.v7.widget.CardView>
+
+        <Button
+            android:id="@+id/btn_nuevo_pago"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:text="Nuevo pago"
+            android:background="@color/colorButton"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="10dp"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
