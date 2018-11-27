@@ -1,4 +1,4 @@
-#Mon Nov 26 17:49:40 CLST 2018
+#Mon Nov 26 23:41:23 CLST 2018
 base.0=C\:\\Users\\user1\\Desktop\\Junior Diplomas\\PaymentApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\3
 path.0=classes.dex
 renamed.0=classes.dex

@@ -18,15 +18,24 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.juncodde.paymentapp.Adapter.CardIssuersAdapter;
 import com.juncodde.paymentapp.Adapter.CuotasAdapter;
+import com.juncodde.paymentapp.BaseDatos.BaseDatos;
 import com.juncodde.paymentapp.Constantes.Const_RestAPI;
+import com.juncodde.paymentapp.Model.PagoCompleto;
 import com.juncodde.paymentapp.RestApi.Adapter.RestAPIAdapter;
 import com.juncodde.paymentapp.RestApi.Endpoints;
 import com.juncodde.paymentapp.RestApi.model.CardIssuers;
 import com.juncodde.paymentapp.RestApi.model.Cuotas;
 import com.juncodde.paymentapp.RestApi.model.CuotasResponse;
+import com.juncodde.paymentapp.RestApi.model.PaymentMethods;
 import com.juncodde.paymentapp.Utilities.ManageSharedPreferences;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +93,16 @@ public class CuotasActivity extends AppCompatActivity {
                         msp.guardarCuotas(cuotaCurrent);
                         msp.setPagoCompleted(true);
 
+
+                        DateFormat df = new SimpleDateFormat("dd-MM-yy h:mm a");
+                        String date = df.format(Calendar.getInstance().getTime());
+
+                        PagoCompleto pc = new PagoCompleto( msp.obtenerMonto(),date ,
+                                msp.obtenerCardIssuers(),cuotaCurrent,msp.obtenerMetodoPago());
+
+                        BaseDatos db = new BaseDatos(getApplicationContext());
+                        db.agregarPagoCompletado(pc);
+
                         Intent i = new Intent(CuotasActivity.this, MainActivity.class)
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                 .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -92,7 +111,7 @@ public class CuotasActivity extends AppCompatActivity {
                         finish();
 
                     }else{
-                        Toast.makeText(CuotasActivity.this, "Selecciona un metodo de pago", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CuotasActivity.this, "Selecciona una opcion de cuota", Toast.LENGTH_SHORT).show();
                     }
                 }
 

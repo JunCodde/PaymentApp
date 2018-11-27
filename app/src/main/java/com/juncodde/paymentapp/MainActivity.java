@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout Lly_pagoCompletado, Lly_monto;
 
     private ManageSharedPreferences sharedPreferences;
-
     boolean getPagoCompleted;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,36 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
            showError(false);
 
-           btn_continuar.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   if(et_monto.getText().toString().isEmpty()){
-                       showError(true);
-                       tv_errorMonto.setText(getResources().getText(R.string.error_monto));
-                   }else{
-                       int mount = Integer.valueOf(et_monto.getText().toString());
-                       if(mount>=250000){
-                           //Monto menor a 250mil
-                           showError(true);
-                           tv_errorMonto.setText("El limite es $250.000");
-                       }else{
 
-                           //go to next page TODO
-                           sharedPreferences.guardarMonto(et_monto.getText().toString());
-
-                           Intent i = new Intent(MainActivity.this, MedioDePagoActivity.class)
-                                   .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                   .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                                   .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                           startActivity(i);
-                           finish();
-
-
-                       }
-                   }
-               }
-           });
 
        }else{
 
@@ -138,15 +109,48 @@ public class MainActivity extends AppCompatActivity {
            tv_Cuotas.setText(c.getRecommended_message());
 
 
-           btn_nuevo_pago.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   sharedPreferences.borrarUltimoPago();
-                   showPagoSelected(false);
-               }
-           });
 
        }
+
+        btn_continuar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(et_monto.getText().toString().isEmpty()){
+                    showError(true);
+                    tv_errorMonto.setText(getResources().getText(R.string.error_monto));
+                }else{
+                    int mount = Integer.valueOf(et_monto.getText().toString());
+                    if(mount>=250000){
+                        //Monto menor a 250mil
+                        showError(true);
+                        tv_errorMonto.setText("El limite es $250.000");
+                    }else{
+
+                        //go to next page TODO
+                        sharedPreferences.guardarMonto(et_monto.getText().toString());
+
+                        Intent i = new Intent(MainActivity.this, MedioDePagoActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                        startActivity(i);
+                        finish();
+
+
+                    }
+                }
+            }
+        });
+
+        btn_nuevo_pago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sharedPreferences.borrarUltimoPago();
+                showPagoSelected(false);
+            }
+        });
+
 
 
     }
@@ -187,4 +191,33 @@ public class MainActivity extends AppCompatActivity {
             showError(false);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_options_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.historial_pagos:
+
+                Intent i = new Intent(MainActivity.this, HistorialPagosActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                startActivity(i);
+                finish();
+
+                break;
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

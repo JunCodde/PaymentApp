@@ -31,6 +31,7 @@
         <activity android:name="com.juncodde.paymentapp.MedioDePagoActivity" />
         <activity android:name="com.juncodde.paymentapp.CuotasActivity" />
         <activity android:name="com.juncodde.paymentapp.BankSelectionActivity" />
+        <activity android:name="com.juncodde.paymentapp.HistorialPagosActivity" />
 
         <provider
             android:name="com.squareup.picasso.PicassoProvider"

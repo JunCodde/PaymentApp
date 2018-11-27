@@ -3,7 +3,7 @@
     package="com.juncodde.paymentapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".MedioDePagoActivity" />
         <activity android:name=".CuotasActivity" />
-        <activity android:name=".BankSelectionActivity"></activity>
+        <activity android:name=".BankSelectionActivity" />
+        <activity android:name=".HistorialPagosActivity"></activity>
     </application>
 
 </manifest>

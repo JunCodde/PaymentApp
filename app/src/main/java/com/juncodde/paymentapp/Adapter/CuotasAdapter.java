@@ -22,12 +22,11 @@ import java.util.List;
 
 public class CuotasAdapter extends RecyclerView.Adapter<CuotasAdapter.CuotasAdapterViewHolder> {
 
-    ArrayList<Cuotas> listaCuotas;
-    Activity a;
+    private ArrayList<Cuotas> listaCuotas;
+    private Activity a;
 
     public int idSelected = -1;
 
-    ManageSharedPreferences manageSharedPreferences;
 
     public CuotasAdapter(ArrayList<Cuotas> listaPagos , Activity a) {
         this.listaCuotas = listaPagos;
@@ -39,8 +38,6 @@ public class CuotasAdapter extends RecyclerView.Adapter<CuotasAdapter.CuotasAdap
     public CuotasAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rv_cuotas, viewGroup, false);
         CuotasAdapter.CuotasAdapterViewHolder pvh = new CuotasAdapter.CuotasAdapterViewHolder(v);
-
-        manageSharedPreferences = new ManageSharedPreferences(a);
 
         return pvh;
     }

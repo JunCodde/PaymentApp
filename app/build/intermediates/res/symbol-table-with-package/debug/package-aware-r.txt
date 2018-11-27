@@ -684,6 +684,8 @@ drawable tooltip_frame_light
 id ALT
 id CTRL
 id FUNCTION
+id LLy_error
+id LLy_principal
 id Lly_monto
 id Lly_pagoCompletado
 id Lly_principal
@@ -721,6 +723,7 @@ id blocking
 id bottom
 id btn_continuar
 id btn_nuevo_pago
+id btn_volver
 id buttonPanel
 id center
 id center_horizontal
@@ -753,6 +756,7 @@ id forever
 id gone
 id group_divider
 id groups
+id historial_pagos
 id home
 id homeAsUp
 id icon
@@ -793,6 +797,7 @@ id right
 id right_icon
 id right_side
 id rv_cuotas
+id rv_historialPagos
 id rv_metodoDePago
 id rv_tiposBancos
 id screen
@@ -840,7 +845,9 @@ id title_template
 id top
 id topPanel
 id tv_Cuotas
+id tv_cuotas
 id tv_errorMonto
+id tv_fecha
 id tv_medioPago
 id tv_monto
 id tv_showError
@@ -886,6 +893,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_bank_selection
 layout activity_cuotas
+layout activity_historial_pagos
 layout activity_main
 layout activity_medio_de_pago
 layout notification_action
@@ -895,11 +903,13 @@ layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout rv_cuotas
+layout rv_historial
 layout rv_payment_methods
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+menu menu_options_main
 mipmap ic_launcher
 mipmap ic_launcher_round
 string abc_action_bar_home_description
