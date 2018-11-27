@@ -27,6 +27,9 @@ import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Hola mucho gusto, soy Junior Ricci, me encanta programar y mucho mas aprender
+    //Espero que les guste mi app. un saludo, quedo a la espera de su respuesta :)
+
     private TextView tv_errorMonto, tv_monto, tv_medioPago, tv_tipoBanco, tv_Cuotas;
     private EditText et_monto;
     private Button btn_continuar, btn_nuevo_pago;
