@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.juncodde.paymentapp.Adapter.PaymentMethodsAdapter;
 import com.juncodde.paymentapp.Constantes.Const_RestAPI;
+import com.juncodde.paymentapp.Interfaces.IMedioDePago;
+import com.juncodde.paymentapp.Presentador.MedioDePagoPresenter;
 import com.juncodde.paymentapp.RestApi.Adapter.RestAPIAdapter;
 import com.juncodde.paymentapp.RestApi.Endpoints;
 import com.juncodde.paymentapp.RestApi.model.PaymentMethods;
@@ -29,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MedioDePagoActivity extends AppCompatActivity {
+public class MedioDePagoActivity extends AppCompatActivity implements IMedioDePago.View {
 
     ManageSharedPreferences msp;
 
@@ -40,6 +42,9 @@ public class MedioDePagoActivity extends AppCompatActivity {
 
     private List<PaymentMethods> listaPagos = new ArrayList<>();
     private PaymentMethodsAdapter adapter;
+
+    private MedioDePagoPresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,8 @@ public class MedioDePagoActivity extends AppCompatActivity {
         pb_cargarMetodos = (ProgressBar) findViewById(R.id.pb_cargarMetodos);
         Lly_principal = (LinearLayout) findViewById(R.id.Lly_principal);
 
+        presenter = new MedioDePagoPresenter(this);
+
         //Set title Color
         Toolbar actionBarToolbar = (Toolbar) findViewById(R.id.action_bar);
         if (actionBarToolbar != null) {
@@ -62,79 +69,18 @@ public class MedioDePagoActivity extends AppCompatActivity {
 
         showProgressBar(true);
 
+        presenter.getListPM();
 
         btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(adapter!=null){
 
-                    int idSelected = adapter.idSelected;
-
-                    if(idSelected!=-1){
-
-                        PaymentMethods pm = listaPagos.get(idSelected);
-                        msp.guardarMetodoPago(pm);
-
-                        Intent i = new Intent(MedioDePagoActivity.this, BankSelectionActivity.class)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                        startActivity(i);
-                        finish();
-
-                    }else{
-                        Toast.makeText(MedioDePagoActivity.this, "Selecciona un metodo de pago", Toast.LENGTH_SHORT).show();
-                    }
+                    presenter.guardarPM(adapter, MedioDePagoActivity.this, listaPagos);
 
                 }
             }
         });
-
-        final Map<String, String> params = new HashMap<String, String>();
-        params.put(Const_RestAPI.PAYMENT_METHOD_KEY, Const_RestAPI.API_KEY);
-
-        RestAPIAdapter adapter = new RestAPIAdapter();
-        Endpoints e = adapter.establecerConexionMercadoPago();
-        Call<List<PaymentMethods>> response = e.getPayment_Methods(params);
-
-        response.enqueue(new Callback<List<PaymentMethods>>() {
-            @Override
-            public void onResponse(Call<List<PaymentMethods>> call, Response<List<PaymentMethods>> response) {
-
-                List<PaymentMethods> listaPagosCurrent = response.body();
-
-
-                //poner datos en RecyclerView
-
-                if(listaPagosCurrent!=null){
-                    if(!listaPagosCurrent.isEmpty()){
-
-                        for (int i = 0; i < listaPagosCurrent.size(); i++) {
-
-                            if(listaPagosCurrent.get(i).getPayment_type_id().equals("credit_card")){
-
-                                listaPagos.add(listaPagosCurrent.get(i));
-
-                            }
-
-                        }
-
-                        showProgressBar(false);
-                        setRV();
-                    }
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<PaymentMethods>> call, Throwable t) {
-
-                Toast.makeText(MedioDePagoActivity.this, "Error: " + t, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
 
     }
 
@@ -165,5 +111,21 @@ public class MedioDePagoActivity extends AppCompatActivity {
 
         startActivity(i);
         finish();
+    }
+
+    @Override
+    public void getListPM(List<PaymentMethods> ListPM) {
+
+        Toast.makeText(this, "" + ListPM.size(), Toast.LENGTH_SHORT).show();
+
+        listaPagos = ListPM;
+
+        showProgressBar(false);
+        setRV();
+    }
+
+    @Override
+    public void showError(String err) {
+        Toast.makeText(MedioDePagoActivity.this, err, Toast.LENGTH_SHORT).show();
     }
 }
