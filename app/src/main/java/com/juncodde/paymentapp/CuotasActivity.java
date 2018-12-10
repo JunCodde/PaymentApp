@@ -15,29 +15,21 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.juncodde.paymentapp.Adapter.CardIssuersAdapter;
 import com.juncodde.paymentapp.Adapter.CuotasAdapter;
 import com.juncodde.paymentapp.BaseDatos.BaseDatos;
 import com.juncodde.paymentapp.Constantes.Const_RestAPI;
-import com.juncodde.paymentapp.Model.PagoCompleto;
+import com.juncodde.paymentapp.POJO.PagoCompleto;
 import com.juncodde.paymentapp.RestApi.Adapter.RestAPIAdapter;
 import com.juncodde.paymentapp.RestApi.Endpoints;
-import com.juncodde.paymentapp.RestApi.model.CardIssuers;
 import com.juncodde.paymentapp.RestApi.model.Cuotas;
 import com.juncodde.paymentapp.RestApi.model.CuotasResponse;
-import com.juncodde.paymentapp.RestApi.model.PaymentMethods;
 import com.juncodde.paymentapp.Utilities.ManageSharedPreferences;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -175,7 +167,9 @@ public class CuotasActivity extends AppCompatActivity {
 
     }
 
-    @Override
+
+
+        @Override
     public void onBackPressed() {
         Intent i = new Intent(CuotasActivity.this, BankSelectionActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

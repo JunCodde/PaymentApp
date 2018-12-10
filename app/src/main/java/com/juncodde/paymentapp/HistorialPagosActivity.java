@@ -11,11 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.juncodde.paymentapp.Adapter.CuotasAdapter;
 import com.juncodde.paymentapp.Adapter.HistorialAdapter;
 import com.juncodde.paymentapp.BaseDatos.BaseDatos;
-import com.juncodde.paymentapp.Model.PagoCompleto;
-import com.juncodde.paymentapp.RestApi.model.Cuotas;
+import com.juncodde.paymentapp.POJO.PagoCompleto;
 
 import java.util.ArrayList;
 

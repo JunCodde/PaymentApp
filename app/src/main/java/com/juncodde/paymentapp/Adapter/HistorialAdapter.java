@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.juncodde.paymentapp.Model.PagoCompleto;
+import com.juncodde.paymentapp.POJO.PagoCompleto;
 import com.juncodde.paymentapp.R;
 import com.squareup.picasso.Picasso;
 

@@ -38,7 +38,7 @@ public class MedioDePagoActivity extends AppCompatActivity {
     private Button btn_continuar;
     private RecyclerView rv_metodoDePago;
 
-    private List<PaymentMethods> listaPagos;
+    private List<PaymentMethods> listaPagos = new ArrayList<>();
     private PaymentMethodsAdapter adapter;
 
     @Override
@@ -104,7 +104,6 @@ public class MedioDePagoActivity extends AppCompatActivity {
 
                 List<PaymentMethods> listaPagosCurrent = response.body();
 
-                listaPagos = new ArrayList<>();
 
                 //poner datos en RecyclerView
 

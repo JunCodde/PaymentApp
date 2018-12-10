@@ -19,13 +19,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.juncodde.paymentapp.Interfaces.IMonto;
+import com.juncodde.paymentapp.POJO.PagoCompleto;
+import com.juncodde.paymentapp.Presentador.MainActivitypresenter;
 import com.juncodde.paymentapp.RestApi.model.CardIssuers;
 import com.juncodde.paymentapp.RestApi.model.Cuotas;
 import com.juncodde.paymentapp.RestApi.model.PaymentMethods;
 import com.juncodde.paymentapp.Utilities.ManageSharedPreferences;
 import com.squareup.picasso.Picasso;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMonto.View {
 
     //Hola mucho gusto, soy Junior Ricci, me encanta programar y mucho mas aprender
     //Espero que les guste mi app. un saludo, quedo a la espera de su respuesta :)
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ManageSharedPreferences sharedPreferences;
     boolean getPagoCompleted;
+
+    private IMonto.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
         getPagoCompleted = sharedPreferences.getPagoCompleted();
 
+        presenter = new MainActivitypresenter(this, MainActivity.this);
+
         showPagoSelected(getPagoCompleted);
 
        if(!getPagoCompleted){
@@ -78,9 +85,6 @@ public class MainActivity extends AppCompatActivity {
                getSupportActionBar().setTitle("Ingresa el monto");
            }
 
-           showError(false);
-
-
 
        }else{
 
@@ -91,58 +95,16 @@ public class MainActivity extends AppCompatActivity {
                getSupportActionBar().setTitle("Pago Completado");
            }
 
-           String monto = sharedPreferences.obtenerMonto();
-           PaymentMethods pm = sharedPreferences.obtenerMetodoPago();
-           CardIssuers ci = sharedPreferences.obtenerCardIssuers();
-           Cuotas c = sharedPreferences.obtenerCuotas();
-
-           tv_monto.setText("$ " + monto);
-
-           //poner metodo de pago
-           Picasso.get().load(pm.getSecure_thumbnail())
-                   .into(img_medioPago);
-           tv_medioPago.setText(pm.getName());
-
-           //poner tipo de banco
-           Picasso.get().load(ci.getSecure_thumbnail())
-                   .into(img_tipoBanco);
-           tv_tipoBanco.setText(ci.getName());
-
-           //poner cuotas
-           tv_Cuotas.setText(c.getRecommended_message());
-
-
+           presenter.showPagoCompleto();
 
        }
 
         btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(et_monto.getText().toString().isEmpty()){
-                    showError(true);
-                    tv_errorMonto.setText(getResources().getText(R.string.error_monto));
-                }else{
-                    int mount = Integer.valueOf(et_monto.getText().toString());
-                    if(mount>=250000){
-                        //Monto menor a 250mil
-                        showError(true);
-                        tv_errorMonto.setText("El limite es $250.000");
-                    }else{
 
-                        //go to next page TODO
-                        sharedPreferences.guardarMonto(et_monto.getText().toString());
+                presenter.guardarMonto(et_monto.getText().toString());
 
-                        Intent i = new Intent(MainActivity.this, MedioDePagoActivity.class)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                        startActivity(i);
-                        finish();
-
-
-                    }
-                }
             }
         });
 
@@ -153,23 +115,6 @@ public class MainActivity extends AppCompatActivity {
                 showPagoSelected(false);
             }
         });
-
-
-
-    }
-
-    public void showError(boolean isError){
-
-        if(isError){
-            tv_errorMonto.setVisibility(View.VISIBLE);
-            et_monto.getBackground().mutate().setColorFilter(getResources()
-                    .getColor(R.color.colorError), PorterDuff.Mode.SRC_ATOP);
-        }else{
-
-            tv_errorMonto.setVisibility(View.GONE);
-            et_monto.getBackground().mutate().setColorFilter(getResources()
-                    .getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
-        }
 
     }
 
@@ -190,8 +135,6 @@ public class MainActivity extends AppCompatActivity {
                 actionBarToolbar.setTitleTextColor(Color.BLACK);
                 getSupportActionBar().setTitle("Ingresa el monto");
             }
-
-            showError(false);
         }
     }
 
@@ -223,4 +166,34 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    @Override
+    public void ShowError(String err) {
+
+        tv_errorMonto.setText(err);
+
+        tv_errorMonto.setVisibility(View.VISIBLE);
+        et_monto.getBackground().mutate().setColorFilter(getResources()
+                .getColor(R.color.colorError), PorterDuff.Mode.SRC_ATOP);
+
+    }
+
+    @Override
+    public void showPagoCompleto(PagoCompleto pc) {
+        tv_monto.setText("$ " + pc.getMonto());
+
+        //poner metodo de pago
+        Picasso.get().load(pc.getPaymentMethods().getSecure_thumbnail())
+                .into(img_medioPago);
+        tv_medioPago.setText(pc.getPaymentMethods().getName());
+
+        //poner tipo de banco
+        Picasso.get().load(pc.getCardIssuers().getSecure_thumbnail())
+                .into(img_tipoBanco);
+        tv_tipoBanco.setText(pc.getCardIssuers().getName());
+
+        //poner cuotas
+        tv_Cuotas.setText(pc.getCuotas().getRecommended_message());
+
+    }
 }

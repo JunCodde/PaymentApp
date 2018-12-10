@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.juncodde.paymentapp.Constantes.Const_BaseDatos;
-import com.juncodde.paymentapp.Model.PagoCompleto;
+import com.juncodde.paymentapp.POJO.PagoCompleto;
 import com.juncodde.paymentapp.RestApi.model.CardIssuers;
 import com.juncodde.paymentapp.RestApi.model.Cuotas;
 import com.juncodde.paymentapp.RestApi.model.PaymentMethods;
